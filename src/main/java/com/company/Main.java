@@ -1,4 +1,5 @@
 package com.company;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -200,7 +201,7 @@ public class Main {
     private static void addAddressBook(String addressBookName) {
         boolean flag = true;
         while (flag) {
-            System.out.println("1. Add\n2. Edit\n3. Delete\n4. Exit");
+            System.out.println("1. Add\n2. Edit\n3. Delete\n4. raed csv file\n5. Exit");
             int check;
             System.out.println("Enter Your Choice");
             check = sc.nextInt();
@@ -218,6 +219,13 @@ public class Main {
                     addressBook.displayContacts();
                     break;
                 case 4:
+                    try {
+                        addressBook.readDataFromCSV();// calling readData from CSV  method
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 5:
                     addressBook.displayContacts();
                     flag = false;
                     break;

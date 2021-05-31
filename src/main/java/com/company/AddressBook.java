@@ -56,9 +56,42 @@ public class AddressBook {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            writeDataToCSV();
+        } catch (IOException | CsvDataTypeMismatchException | CsvRequiredFieldEmptyException e) {
+            e.printStackTrace();
+        }
     }
 
-
+    // write data to CSV file
+    public static void writeDataToCSV() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        try (Writer writer = Files.newBufferedWriter(Paths.get("C:\\Users\\hp\\IdeaProjects\\AddressBookService\\src\\main\\resources\\contact.csv"));) {
+            StatefulBeanToCsvBuilder<Contact> builder = new StatefulBeanToCsvBuilder<>(writer);
+            StatefulBeanToCsv<Contact> beanWriter = builder.build();
+            beanWriter.write(persons);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // Read data from CSV file
+    public void readDataFromCSV() throws IOException {
+        try (Reader reader = Files.newBufferedReader(Paths.get("C:\\Users\\hp\\IdeaProjects\\AddressBookService\\src\\main\\resources\\contact.csv"));
+             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();) {
+            String[] nextRecord;
+            while ((nextRecord = csvReader.readNext()) != null) {
+                System.out.println("First Name - " + nextRecord[3]);
+                System.out.println("Last Name - " + nextRecord[4]);
+                System.out.println("Address - " + nextRecord[0]);
+                System.out.println("City - " + nextRecord[1]);
+                System.out.println("State - " + nextRecord[6]);
+                System.out.println("Email - " + nextRecord[2]);
+                System.out.println("Phone - " + nextRecord[5]);
+                System.out.println("Zip - " + nextRecord[7]);
+            }
+        } catch (CsvValidationException e) {
+            e.printStackTrace();
+        }
+    }
     public static void writeData() throws IOException {
         System.out.println(persons);
 
