@@ -233,7 +233,7 @@ public class Main {
                     }
                     break;
                 case 6:
-                    addressBook.readData();// calling readData method
+                    addressBook.readData();// calling readData method for File Io
                     break;
                 case 7:
                     addressBook.displayContacts();

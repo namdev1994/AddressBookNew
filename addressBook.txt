@@ -1,1 +1,1 @@
-ContactDetails [firstName=pandurang, lastName=madke, address=pattiwadgaon, city=Ambejogai, state=maharashtra, zip=431519, phoneNumber=808080808, email=pandurang@gmail.com]
+ContactDetails [firstName=pandurang, lastName=madke, address=Pattiwadgaon, city=Ambejogai, state=Maharashtra, zip=431519, phoneNumber=8080808080, email=pandurang@gamil.com]
