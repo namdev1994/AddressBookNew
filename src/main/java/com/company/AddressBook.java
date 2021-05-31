@@ -61,7 +61,46 @@ public class AddressBook {
         } catch (IOException | CsvDataTypeMismatchException | CsvRequiredFieldEmptyException e) {
             e.printStackTrace();
         }
+        try {
+            writeDataInJSon();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
+
+    public static void writeDataInJSon() throws IOException {
+        {
+            Path filePath = Paths.get(
+                    "C:\\Users\\hp\\IdeaProjects\\AddressBookService\\src\\main\\resources\\contact.json");
+            Gson gson = new Gson();
+            String json = gson.toJson(persons);
+            FileWriter writer = new FileWriter(String.valueOf(filePath));
+            writer.write(json);
+            writer.close();
+        }
+    }
+    // Read from JSON
+    public void readDataFromJson() throws IOException {
+        ArrayList<Contact> contactList = null;
+        Path filePath = Paths.get(
+                "C:\\Users\\hp\\IdeaProjects\\AddressBookService\\src\\main\\resources\\contact.json");
+        try (Reader reader = Files.newBufferedReader(filePath);) {
+            Gson gson = new Gson();
+            contactList = new ArrayList<Contact>(Arrays.asList(gson.fromJson(reader, Contact[].class)));
+            for (Contact contact : contactList) {
+                System.out.println("Firstname : " + contact.getFirstName());
+                System.out.println("Lastname : " + contact.getLastName());
+                System.out.println("Address : " + contact.getAddress());
+                System.out.println("City : " + contact.getCity());
+                System.out.println("State : " + contact.getState());
+                System.out.println("Zip : " + contact.getZip());
+                System.out.println("Phone number : " + contact.getPhoneNumber());
+                System.out.println("Email : " + contact.getEmail());
+            }
+        }
+    }
+
 
     // write data to CSV file
     public static void writeDataToCSV() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {

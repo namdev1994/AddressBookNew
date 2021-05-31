@@ -201,7 +201,7 @@ public class Main {
     private static void addAddressBook(String addressBookName) {
         boolean flag = true;
         while (flag) {
-            System.out.println("1. Add\n2. Edit\n3. Delete\n4. raed csv file\n5. Exit");
+            System.out.println("1. Add\n2. Edit\n3. Delete\n4. raed csv file\n5. read data from json file \n6. read data from text file\n7. Exit");
             int check;
             System.out.println("Enter Your Choice");
             check = sc.nextInt();
@@ -226,6 +226,16 @@ public class Main {
                     }
                     break;
                 case 5:
+                    try {
+                        addressBook.readDataFromJson();// calling readData from Json method
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 6:
+                    addressBook.readData();// calling readData method
+                    break;
+                case 7:
                     addressBook.displayContacts();
                     flag = false;
                     break;
